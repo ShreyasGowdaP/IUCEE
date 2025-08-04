@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IUCEE Event Registration</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      50% { opacity: 1; transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px rgba(51, 153, 204, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(51, 153, 204, 0.8); }
+      100% { box-shadow: 0 0 5px rgba(51, 153, 204, 0.3); }
+    }
+    
+    .container {
+      animation: fadeIn 0.8s ease-in-out;
+      background: linear-gradient(135deg, #1e1e1e, #2b2b2b);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      max-width: 450px;
+      width: 90%;
+      margin: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+      animation: slideInLeft 0.6s ease-out;
+    }
+    
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.2s; }
+    .form-group:nth-child(3) { animation-delay: 0.3s; }
+    .form-group:nth-child(4) { animation-delay: 0.4s; }
+    .form-group:nth-child(5) { animation-delay: 0.5s; }
+    
+    .form-group input {
+      background-color: #2b2b2b;
+      border: 2px solid #333;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: #3399cc;
+      box-shadow: 0 0 10px rgba(51, 153, 204, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .submit-btn {
+      background: linear-gradient(45deg, #3399cc, #267599);
+      border: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 20px;
+      animation: bounceIn 0.8s ease-out;
+      animation-delay: 0.6s;
+      animation-fill-mode: both;
+    }
+    
+    .submit-btn:hover {
+      background: linear-gradient(45deg, #267599, #1a5a7a);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(51, 153, 204, 0.4);
+      animation: glow 1.5s infinite;
+    }
+    
+    .submit-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+    
+    .title {
+      color: #ffce00;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .subtitle {
+      color: #ccc;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0d1117, #121212);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">IUCEE Event<button aria-placeholder="Organiser" onclick="window.location.href='organizer-login.html'">Organiser</button></h1>
+    <p class="subtitle">Register for the event</p>
+    
+    <form id="registrationForm">
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Enter your Gmail" required />
+      </div>
+      
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Full Name" required />
+      </div>
+      
+      <div class="form-group">
+        <input type="tel" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}" />
+      </div>
+      
+      <div class="form-group">
+        <input type="text" id="college" placeholder="College Name" required />
+      </div>
+      
+      <div class="form-group">
+        <input type="text" id="aadhar" placeholder="Aadhar Number (12 digits)" required pattern="[0-9]{12}" />
+      </div>
+      
+      <button type="submit" class="submit-btn">Pay & Register</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>

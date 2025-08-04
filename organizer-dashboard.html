@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IUCEE Dashboard</title>
+  <style>
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      50% { opacity: 1; transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(51, 153, 204, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(51, 153, 204, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(51, 153, 204, 0); }
+    }
+    
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px rgba(51, 153, 204, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(51, 153, 204, 0.8); }
+      100% { box-shadow: 0 0 5px rgba(51, 153, 204, 0.3); }
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0d1117, #121212);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      padding: 20px;
+    }
+    
+    .dashboard-container {
+      max-width: 600px;
+      margin: 0 auto;
+      animation: slideInRight 0.8s ease-out;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .title {
+      color: #ffce00;
+      font-size: 32px;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      animation: fadeInUp 0.6s ease-out;
+      animation-delay: 0.2s;
+      animation-fill-mode: both;
+    }
+    
+    .subtitle {
+      color: #ccc;
+      font-size: 18px;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.6s ease-out;
+      animation-delay: 0.3s;
+      animation-fill-mode: both;
+    }
+    
+    .card {
+      background: linear-gradient(135deg, #1e1e1e, #2b2b2b);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+      animation: slideInLeft 0.6s ease-out;
+      animation-delay: 0.4s;
+      animation-fill-mode: both;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+    }
+    
+    #session-section {
+      animation-delay: 0.4s;
+    }
+    
+    #scanner-section {
+      animation: bounceIn 0.8s ease-out;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      color: #ffce00;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    
+    .form-group input {
+      width: 100%;
+      background-color: #2b2b2b;
+      border: 2px solid #333;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: #3399cc;
+      box-shadow: 0 0 10px rgba(51, 153, 204, 0.3);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(45deg, #3399cc, #267599);
+      border: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(45deg, #267599, #1a5a7a);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(51, 153, 204, 0.4);
+    }
+    
+    .scanner-card {
+      text-align: center;
+    }
+    
+    .current-session {
+      background: linear-gradient(45deg, #28a745, #20c997);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+    
+    #reader {
+      background: #2b2b2b;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 100%;
+      border: 2px solid #333;
+    }
+    
+    .session-info {
+      font-size: 18px;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .dashboard-container {
+        padding: 10px;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      .title {
+        font-size: 24px;
+      }
+      
+      #reader {
+        width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="header">
+      <h1 class="title">Event Dashboard</h1>
+      <p class="subtitle">Manage session attendance</p>
+    </div>
+
+    <div id="session-section" class="card">
+      <div class="form-group">
+        <label for="sessionName">Enter Session Name:</label>
+        <input type="text" id="sessionName" placeholder="e.g., Workshop 1, Keynote Session" required>
+      </div>
+      <button id="startSessionBtn" class="btn-primary">Start QR Scanning</button>
+    </div>
+
+    <div id="scanner-section" class="card scanner-card" style="display: none;">
+      <div class="current-session">
+        <strong>Active Session:</strong> <span id="currentSession"></span>
+      </div>
+      <div class="session-info">Point camera at QR codes to mark attendance</div>
+      <div id="reader"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
